@@ -1,0 +1,50 @@
+{
+  "name": "cat-blockchain-toolkit",
+  "displayName": "CAT Blockchain Toolkit",
+  "description": "Tools for developing Solidity smart contracts in VSCode",
+  "publisher": "AtlasCity",
+  "icon": "cat-blockchain-toolkit-logo.png",
+  "version": "0.0.4",
+  "engines": {
+    "vscode": "^1.42.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "Solidity",
+    "Catalyst",
+    "CAT",
+    ".sol",
+    "Smart Contract"
+  ],
+  "homepage": "https://atlascity.io",
+  "contributes": {
+    "languages": [
+      {
+        "id": "solidity",
+        "aliases": [
+          "Solidity",
+          "solidity"
+        ],
+        "extensions": [
+          ".sol"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "solidity",
+        "scopeName": "source.solidity",
+        "path": "./syntaxes/solidity.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "solidity",
+        "path": "./snippets/solidity.json"
+      }
+    ]
+  }
+}
