@@ -1,4 +1,6 @@
 # cat-blockchain-toolkit README
+The project titled ‘ETH Blockchain Toolkit’  is a Toolkit for developing Ethereum smart contracts in Visual Studio Code.
+It was developed by team JSEcoin during the Future of Blockchain hackathon that was run between the Universities of Cambridge, Oxford, London or Berlin.
 
 ## Features
 
