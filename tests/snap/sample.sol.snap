@@ -1,0 +1,104 @@
+>pragma solidity ^0.8.20;
+#^^^^^^ source.solidity keyword.control.pragma.solidity
+#      ^ source.solidity
+#       ^^^^^^^^ source.solidity entity.name.tag.pragma.solidity
+#               ^ source.solidity
+#                ^^^^^^^ source.solidity constant.other.pragma.solidity
+#                       ^ source.solidity punctuation.terminator.statement.solidity
+>
+>type UserId is uint256;
+#^^^^ source.solidity storage.type.user-defined-value-type.solidity
+#    ^ source.solidity
+#     ^^^^^^ source.solidity entity.name.type.user-defined-value-type.solidity
+#           ^ source.solidity
+#            ^^ source.solidity keyword.control.user-defined-value-type.solidity
+#              ^ source.solidity
+#               ^^^^^^^ source.solidity support.type.primitive.solidity
+#                      ^ source.solidity punctuation.terminator.statement.solidity
+>
+>error NotAuthorized(address caller);
+#^^^^^ source.solidity storage.type.error.solidity
+#     ^ source.solidity
+#      ^^^^^^^^^^^^^ source.solidity entity.name.type.error.solidity
+#                   ^ source.solidity
+#                    ^^^^^^^ source.solidity support.type.primitive.solidity
+#                           ^^^^^^^^ source.solidity
+#                                   ^ source.solidity punctuation.terminator.statement.solidity
+>
+>contract Example {
+#^^^^^^^^ source.solidity storage.type.contract.solidity
+#        ^ source.solidity
+#         ^^^^^^^ source.solidity entity.name.type.contract.solidity
+#                ^^^ source.solidity
+>    UserId private _id;
+#^^^^^^^^^^^ source.solidity
+#           ^^^^^^^ source.solidity storage.type.modifier.solidity
+#                  ^^^^ source.solidity
+#                      ^ source.solidity punctuation.terminator.statement.solidity
+>
+>    constructor(UserId id) {
+#^^^^ source.solidity
+#    ^^^^^^^^^^^ source.solidity storage.type.constructor.solidity
+#               ^^^^^^^^^^^^^^ source.solidity
+>        _id = id;
+#^^^^^^^^^^^^ source.solidity
+#            ^ source.solidity keyword.operator.assignment.solidity
+#             ^^^ source.solidity
+#                ^ source.solidity punctuation.terminator.statement.solidity
+>    }
+#^^^^^^ source.solidity
+>
+>    receive() external payable {}
+#^^^^ source.solidity
+#    ^^^^^^^ source.solidity storage.type.function.solidity
+#           ^^^ source.solidity
+#              ^^^^^^^^ source.solidity storage.type.modifier.solidity
+#                      ^ source.solidity
+#                       ^^^^^^^ source.solidity storage.type.modifier.solidity
+#                              ^^^^ source.solidity
+>    fallback() external {}
+#^^^^ source.solidity
+#    ^^^^^^^^ source.solidity storage.type.function.solidity
+#            ^^^ source.solidity
+#               ^^^^^^^^ source.solidity storage.type.modifier.solidity
+#                       ^^^^ source.solidity
+>
+>    function inc(uint256 x) external pure returns (uint256) {
+#^^^^ source.solidity
+#    ^^^^^^^^ source.solidity storage.type.function.solidity
+#            ^ source.solidity
+#             ^^^ source.solidity entity.name.function.solidity
+#                ^ source.solidity
+#                 ^^^^^^^ source.solidity support.type.primitive.solidity
+#                        ^^^^ source.solidity
+#                            ^^^^^^^^ source.solidity storage.type.modifier.solidity
+#                                    ^ source.solidity
+#                                     ^^^^ source.solidity storage.type.modifier.solidity
+#                                         ^ source.solidity
+#                                          ^^^^^^^ source.solidity storage.type.modifier.solidity
+#                                                 ^^ source.solidity
+#                                                   ^^^^^^^ source.solidity support.type.primitive.solidity
+#                                                          ^^^^ source.solidity
+>        unchecked {
+#^^^^^^^^ source.solidity
+#        ^^^^^^^^^ source.solidity keyword.control.solidity
+#                 ^^^ source.solidity
+>            x += 1;
+#^^^^^^^^^^^^^^ source.solidity
+#              ^^ source.solidity keyword.operator.assignment.solidity
+#                ^ source.solidity
+#                 ^ source.solidity constant.numeric.decimal.solidity
+#                  ^ source.solidity punctuation.terminator.statement.solidity
+>        }
+#^^^^^^^^^^ source.solidity
+>        return x;
+#^^^^^^^^ source.solidity
+#        ^^^^^^ source.solidity keyword.control.flow.solidity
+#              ^^ source.solidity
+#                ^ source.solidity punctuation.terminator.statement.solidity
+>    }
+#^^^^^^ source.solidity
+>}
+#^^ source.solidity
+>
+>

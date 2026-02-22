@@ -4,7 +4,9 @@
   "description": "Tools for developing Solidity smart contracts in VSCode",
   "publisher": "AtlasCity",
   "icon": "cat-blockchain-toolkit-logo.png",
-  "version": "0.0.4",
+  "version": "0.0.5",
+  "license": "GPL-3.0-or-later",
+  "author": "AtlasCity",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -19,6 +21,13 @@
     "Smart Contract"
   ],
   "homepage": "https://atlascity.io",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/catalyst-network/Cat-Blockchain-Toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/catalyst-network/Cat-Blockchain-Toolkit/issues"
+  },
   "contributes": {
     "languages": [
       {
@@ -46,5 +55,13 @@
         "path": "./snippets/solidity.json"
       }
     ]
+  },
+  "scripts": {
+    "test": "vscode-tmgrammar-test 'tests/unit/**/*.test.sol'",
+    "test:snap": "vscode-tmgrammar-snap 'tests/snap/**/*.sol'",
+    "test:snap:update": "vscode-tmgrammar-snap --updateSnapshot 'tests/snap/**/*.sol'"
+  },
+  "devDependencies": {
+    "vscode-tmgrammar-test": "^0.1.3"
   }
 }

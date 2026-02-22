@@ -147,29 +147,36 @@
                     "include": "#operator-logic"
                 },
                 {
+                    "include": "#operator-unary"
+                },
+                {
                     "include": "#operator-mapping"
+                },
+                {
+                    "include": "#operator-assignment"
                 },
                 {
                     "include": "#operator-arithmetic"
                 },
                 {
                     "include": "#operator-binary"
-                },
-                {
-                    "include": "#operator-assignment"
                 }
             ]
         },
         "operator-logic": {
-            "match": "(==|<(?!<)|<=|>(?!>)|>=|\\&\\&|\\|\\||\\:(?!=)|\\?)",
+            "match": "(==|!=|<=|>=|<(?!<)|>(?!>)|\\&\\&|\\|\\||\\:(?!=)|\\?)",
             "name": "keyword.operator.logic.solidity"
+        },
+        "operator-unary": {
+            "match": "(\\+\\+|--|!|~)",
+            "name": "keyword.operator.unary.solidity"
         },
         "operator-mapping": {
             "match": "(=>)",
             "name": "keyword.operator.mapping.solidity"
         },
         "operator-arithmetic": {
-            "match": "(\\+|\\-|\\/|\\*)",
+            "match": "(\\*\\*|\\+|\\-|\\/|\\*|%)",
             "name": "keyword.operator.arithmetic.solidity"
         },
         "operator-binary": {
@@ -177,7 +184,7 @@
             "name": "keyword.operator.binary.solidity"
         },
         "operator-assignment": {
-            "match": "(\\:?=)",
+            "match": "(:=|<<=|>>=|\\+=|-=|\\*=|\\/=|%=|\\|=|\\&=|\\^=|=)",
             "name": "keyword.operator.assignment.solidity"
         },
         "control": {
@@ -203,7 +210,7 @@
             ]
         },
         "control-flow": {
-            "match": "\\b(if|else|for|while|do|break|continue|throw|returns?)\\b",
+            "match": "\\b(if|else|for|while|do|break|continue|return|try|catch|throw)\\b",
             "name": "keyword.control.flow.solidity"
         },
         "control-using": {
@@ -233,7 +240,7 @@
             "name": "constant.other.underscore.solidity"
         },
         "control-other": {
-            "match": "\\b(new|delete|emit)\\b",
+            "match": "\\b(new|delete|emit|unchecked)\\b",
             "name": "keyword.control.solidity"
         },
         "constant": {
@@ -258,7 +265,7 @@
             "name": "constant.language.time.solidity"
         },
         "constant-currency": {
-            "match": "\\b(ether|wei|finney|szabo)\\b",
+            "match": "\\b(ether|gwei|wei|finney|szabo)\\b",
             "name": "constant.language.currency.solidity"
         },
         "number": {
@@ -272,21 +279,21 @@
             ]
         },
         "number-decimal": {
-            "match": "\\b(\\d+(\\.\\d+)?)\\b",
+            "match": "\\b(\\d[\\d_]*(?:\\.\\d[\\d_]*)?(?:[eE][+-]?\\d[\\d_]*)?)\\b",
             "name": "constant.numeric.decimal.solidity"
         },
         "number-hex": {
-            "match": "\\b(0[xX][a-fA-F0-9]+)\\b",
+            "match": "\\b(0[xX][a-fA-F0-9_]+)\\b",
             "name": "constant.numeric.hexadecimal.solidity"
         },
         "string": {
             "patterns": [
                 {
-                    "match": "\\\".*?\\\"",
+                    "match": "\\\"(?:\\\\.|[^\\\"\\\\])*\\\"",
                     "name": "string.quoted.double.solidity"
                 },
                 {
-                    "match": "\\'.*?\\'",
+                    "match": "\\'(?:\\\\.|[^\\'\\\\])*\\'",
                     "name": "string.quoted.single.solidity"
                 }
             ]
@@ -299,7 +306,7 @@
             ]
         },
         "type-primitive": {
-            "match": "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)\\b",
+            "match": "\\b(address|bool|byte|bytes\\d*|fixed\\d*x\\d*|int\\d*|string|ufixed\\d*x\\d*|uint\\d*)\\b",
             "name": "support.type.primitive.solidity"
         },
         "global": {
@@ -315,7 +322,7 @@
         "global-variables": {
             "patterns": [
                 {
-                    "match": "\\b(msg|block|tx|now)\\b",
+                    "match": "\\b(abi|msg|block|tx|now)\\b",
                     "name": "variable.language.transaction.solidity"
                 },
                 {
@@ -351,6 +358,12 @@
         "declaration": {
             "patterns": [
                 {
+                    "include": "#declaration-error"
+                },
+                {
+                    "include": "#declaration-user-defined-value-type"
+                },
+                {
                     "include": "#declaration-contract"
                 },
                 {
@@ -369,6 +382,9 @@
                     "include": "#declaration-enum"
                 },
                 {
+                    "include": "#declaration-receive-fallback"
+                },
+                {
                     "include": "#declaration-function"
                 },
                 {
@@ -385,62 +401,87 @@
         "declaration-contract": {
             "patterns": [
                 {
-                    "match": "\\b(contract)(\\s+([A-Za-z_]\\w*))?\\b",
+                    "match": "\\b(contract)\\s+([A-Za-z_]\\w*)\\b",
                     "captures": {
                         "1": {
                             "name": "storage.type.contract.solidity"
                         },
-                        "3": {
+                        "2": {
                             "name": "entity.name.type.contract.solidity"
                         }
                     }
                 },
                 {
-                    "match": "\\b(is)\\b",
-                    "name": "storage.modifier.is.solidity"
+                    "match": "\\b(abstract)\\b",
+                    "name": "storage.modifier.abstract.solidity"
                 }
             ]
         },
+        "declaration-error": {
+            "match": "\\b(error)\\s+([A-Za-z_]\\w*)\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.error.solidity"
+                },
+                "2": {
+                    "name": "entity.name.type.error.solidity"
+                }
+            }
+        },
+        "declaration-user-defined-value-type": {
+            "match": "\\b(type)\\s+([A-Za-z_]\\w*)\\s+\\b(is)\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.user-defined-value-type.solidity"
+                },
+                "2": {
+                    "name": "entity.name.type.user-defined-value-type.solidity"
+                },
+                "3": {
+                    "name": "keyword.control.user-defined-value-type.solidity"
+                }
+            }
+        },
         "declaration-interface": {
-            "match": "\\b(interface)(\\s+([A-Za-z_]\\w*))?\\b",
+            "match": "\\b(interface)\\s+([A-Za-z_]\\w*)\\b",
             "captures": {
                 "1": {
                     "name": "storage.type.interface.solidity"
                 },
-                "3": {
+                "2": {
                     "name": "entity.name.type.interface.solidity"
                 }
             }
         },
         "declaration-library": {
-            "match": "\\b(library)(\\s+([A-Za-z_]\\w*))?\\b",
+            "match": "\\b(library)\\s+([A-Za-z_]\\w*)\\b",
             "captures": {
                 "1": {
                     "name": "storage.type.library.solidity"
                 },
-                "3": {
+                "2": {
                     "name": "entity.name.type.library.solidity"
                 }
             }
         },
         "declaration-struct": {
-            "match": "\\b(struct)(\\s+([A-Za-z_]\\w*))?\\b",
+            "match": "\\b(struct)\\s+([A-Za-z_]\\w*)\\b",
             "captures": {
                 "1": {
                     "name": "storage.type.struct.solidity"
                 },
-                "3": {
+                "2": {
                     "name": "entity.name.type.struct.solidity"
                 }
             }
         },
         "declaration-event": {
-            "match": "\\b(event)(\\s+([A-Za-z_]\\w*))?\\b",
+            "match": "\\b(event)\\s+([A-Za-z_]\\w*)\\b",
             "captures": {
                 "1": {
                     "name": "storage.type.event.solidity"
                 },
-                "3": {
+                "2": {
                     "name": "entity.name.type.event.solidity"
                 }
             }
@@ -454,12 +495,12 @@
             }
         },
         "declaration-enum": {
-            "match": "\\b(enum)(\\s+([A-Za-z_]\\w*))?\\b",
+            "match": "\\b(enum)\\s+([A-Za-z_]\\w*)\\b",
             "captures": {
                 "1": {
                     "name": "storage.type.enum.solidity"
                 },
-                "3": {
+                "2": {
                     "name": "entity.name.type.enum.solidity"
                 }
             }
@@ -478,10 +519,14 @@
                     }
                 },
                 {
-                    "match": "\\b(private|public|internal|external|constant|pure|view|payable|nonpayable|inherited|indexed|storage|memory)\\b",
-                    "name": "storage.type.mofifier.solidity"
+                    "match": "\\b(private|public|internal|external|constant|pure|view|payable|nonpayable|virtual|override|returns|inherited|indexed|storage|memory|calldata)\\b",
+                    "name": "storage.type.modifier.solidity"
                 }
             ]
+        },
+        "declaration-receive-fallback": {
+            "match": "\\b(receive|fallback)\\b",
+            "name": "storage.type.function.solidity"
         },
         "declaration-modifier": {
             "match": "\\b(modifier)(\\s+([A-Za-z_]\\w*))?\\b",
